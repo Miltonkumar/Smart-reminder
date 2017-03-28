@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="in.ac.utm.smartreminder.MainActivity"
+    android:hapticFeedbackEnabled="true"
+    android:isScrollContainer="true"
+    android:background="@mipmap/background">
+
+    <Button
+        android:text="Sign up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_up"
+        android:layout_marginBottom="61dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:nextFocusForward="@+id/sign_in"
+        android:layout_alignParentStart="true"
+        android:background="#9E9E9E"
+        android:onClick="up_click"
+        android:alpha="0.8" />
+
+    <Button
+        android:text="Sign in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:id="@+id/sign_in"
+        android:layout_above="@+id/sign_up"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#9E9E9E"
+        android:onClick="sign_click"
+        android:alpha="0.8" />
+
+    <ImageView
+        android:layout_height="200dp"
+        app:srcCompat="@mipmap/back"
+        android:layout_marginBottom="35dp"
+        android:id="@+id/imageView5"
+        android:layout_marginRight="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_above="@+id/sign_in"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="200dp" />
+
+</RelativeLayout>
