@@ -1,9 +1,8 @@
 package in.ac.utm.smartreminder;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -17,10 +16,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class register extends AppCompatActivity implements View.OnClickListener{
@@ -32,8 +32,12 @@ public class register extends AppCompatActivity implements View.OnClickListener{
 
     private EditText pass;
     private EditText email;
+    Firebase reference1,reference2;
    // private EditText username;
     private ProgressBar spinner;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class register extends AppCompatActivity implements View.OnClickListener{
         // TODO: Get a reference to the Firebase auth object
         mAuth = FirebaseAuth.getInstance();
 
-
+        Firebase.setAndroidContext(this);
         email = (EditText)findViewById(R.id.reg_mail);
         pass = (EditText)findViewById(R.id.reg_pass);
        // username=(EditText)findViewById(R.id.user_name);
@@ -135,8 +139,8 @@ public class register extends AppCompatActivity implements View.OnClickListener{
             return;
 
          spinner.setVisibility(View.VISIBLE);
-        String myemail = email.getText().toString();
-        String password = pass.getText().toString();
+        final String myemail = email.getText().toString();
+       final String password = pass.getText().toString();
 
         // TODO: Create the user account
         mAuth.createUserWithEmailAndPassword(myemail, password)
@@ -148,6 +152,18 @@ public class register extends AppCompatActivity implements View.OnClickListener{
                                     spinner.setVisibility(View.GONE);
                                     Toast.makeText(register.this, "User created ", Toast.LENGTH_SHORT)
                                             .show();
+
+                                    //adding new user to users database and password to passed database
+                                    reference1 = new Firebase("https://smart-reminder-9ed31.firebaseio.com/users/");
+                                    reference2 = new Firebase("https://smart-reminder-9ed31.firebaseio.com/passwords/");
+                                    if(!myemail.equals("")){
+                                        Map<String, String> map = new HashMap<String, String>();
+                                        map.put("username", myemail);
+                                        map.put("password", password);
+                                        reference1.push().setValue(myemail.split("@")[0]);
+                                         reference2.push().setValue(map);
+
+                                    }
 
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     spinner.setVisibility(View.VISIBLE);

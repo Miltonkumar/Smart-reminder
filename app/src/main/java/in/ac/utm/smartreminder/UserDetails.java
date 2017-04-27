@@ -33,18 +33,20 @@ public class UserDetails extends AppCompatActivity{
             if(mymess.equalsIgnoreCase("good night")||mymess.equalsIgnoreCase("night"))
                 return "good night!!! sweet dreams";
 
-        Pattern p=Pattern.compile(".*[rR]eminder|[rR]emainder|[rR]emind|[aA]larm.*");
+        // sending notification to friends -- keyword user
+        Pattern p1=Pattern.compile("user");
+        Matcher m1=p1.matcher(mymess);
+        while (m1.find()){
+            return "two";
+        }
+
+        // setting up alarm
+        Pattern p=Pattern.compile(".*[rR]eminder|[wW]ake|[rR]emainder|[rR]emind|[aA]larm.*");
         Matcher m=p.matcher(mymess);
         while (m.find()){
             return "one";
         }
 
-       // pattern pp=P
-       /* Pattern p1=Pattern.compile("alarm");
-        Matcher m1=p1.matcher(mymess);
-        while (m1.find()){
-            return "one";
-        }*/
        /* Pattern p2=Pattern.compile("remind");
         Matcher m2=p2.matcher(mymess);
         while (m2.find()){
@@ -52,7 +54,7 @@ public class UserDetails extends AppCompatActivity{
         }*/
 
 
-            return "i am unable to understand you...my admin will reply you soon.Thanks!!!";
+            return "";
         }
 
     }

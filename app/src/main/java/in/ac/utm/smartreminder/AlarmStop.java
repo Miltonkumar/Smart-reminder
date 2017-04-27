@@ -36,5 +36,9 @@ public class AlarmStop extends AppCompatActivity {
             }
         });
     }
+    public void onDestroy(){
+        super.onDestroy();
+
+    }
 
 }

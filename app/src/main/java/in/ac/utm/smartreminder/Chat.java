@@ -69,6 +69,7 @@ public class Chat extends AppCompatActivity {
                     map.put("user", UserDetails.password);
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
+                    messageArea.setText("");
                 }
             }
         });
@@ -136,6 +137,9 @@ public class Chat extends AppCompatActivity {
              Intent i=new Intent(this,AlarmHandler.class);
              startActivity(i);
              return "ok";
+         }
+        else if(n=="two"){
+             
          }
 
         return n;
