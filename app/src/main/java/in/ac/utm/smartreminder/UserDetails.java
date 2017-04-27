@@ -1,11 +1,16 @@
 package in.ac.utm.smartreminder;
 
 /**
- * Created by milto on 2/22/2017.
+ * Created by milton on 2/22/2017.
  */
-import java.lang.String;
 
-public class UserDetails {
+import android.support.v7.app.AppCompatActivity;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+public class UserDetails extends AppCompatActivity{
     static String username = "";
     static String password = "assistant";
     static String chatWith = "admin";
@@ -16,13 +21,7 @@ public class UserDetails {
 
     public static String assistant(String mymess) {
         mymess=mymess.trim();
-        int l = mymess.length();
-        int b = 0;
         String result = "";
-        for (int i = 0; i < l - 1; i++) {
-            char p = mymess.charAt(i);
-            char q = mymess.charAt(i + 1);
-        }
             if(mymess.equalsIgnoreCase("hello"))
                 return "hi...how can i help you";
             if(mymess.equalsIgnoreCase("hi"))
@@ -33,6 +32,24 @@ public class UserDetails {
                 return "Evening!!!enjoy your evening";
             if(mymess.equalsIgnoreCase("good night")||mymess.equalsIgnoreCase("night"))
                 return "good night!!! sweet dreams";
+
+        Pattern p=Pattern.compile(".*[rR]eminder|[rR]emainder|[rR]emind|[aA]larm.*");
+        Matcher m=p.matcher(mymess);
+        while (m.find()){
+            return "one";
+        }
+
+       // pattern pp=P
+       /* Pattern p1=Pattern.compile("alarm");
+        Matcher m1=p1.matcher(mymess);
+        while (m1.find()){
+            return "one";
+        }*/
+       /* Pattern p2=Pattern.compile("remind");
+        Matcher m2=p2.matcher(mymess);
+        while (m2.find()){
+            return "one";
+        }*/
 
 
             return "i am unable to understand you...my admin will reply you soon.Thanks!!!";

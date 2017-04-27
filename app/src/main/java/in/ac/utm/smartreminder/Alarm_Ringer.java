@@ -12,7 +12,14 @@ public class Alarm_Ringer extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        //fetch extra string from intent
+        String get_string=intent.getExtras().getString("extra");
+
         Intent service_intent=new Intent(context,RingtonePlayingService.class);
+
+        //pass the extra string to the ringtone playing service
+        service_intent.putExtra("extra",get_string);
+
         context.startService(service_intent);
     }
 }

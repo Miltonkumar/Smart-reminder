@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.ac.utm.smartreminder">
-    <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -19,9 +20,18 @@
         </activity>
         <activity android:name=".login" />
         <activity android:name=".register" />
-        <activity android:name=".Users"/>
-        <activity android:name=".Chat"/>
-        <activity android:name=".Reset_password"></activity>
+        <activity android:name=".Users" />
+        <activity android:name=".Chat" />
+        <activity android:name=".Reset_password" />
+        <activity android:name=".AlarmHandler" />
+
+        <receiver android:name=".Alarm_Ringer" />
+
+        <service
+            android:name=".RingtonePlayingService"
+            android:enabled="true" />
+
+        <activity android:name=".AlarmStop"></activity>
     </application>
 
 </manifest>

@@ -21,10 +21,11 @@ public class AlarmHandler extends AppCompatActivity {
     DatePicker dp;
     Button tDone;
     Button alarmOff;
-    EditText des;
+    static EditText des;
     Context context;
     AlarmManager  alarm_manager;
     PendingIntent pending_intent;
+    static String getDes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,9 @@ public class AlarmHandler extends AppCompatActivity {
         tDone=(Button)findViewById(R.id.timeSet);
         des=(EditText)findViewById(R.id.timeDesc);
         alarmOff=(Button)findViewById(R.id.canc_btn);
+
+
+
        // Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
         this.context=this;
@@ -61,6 +65,10 @@ public class AlarmHandler extends AppCompatActivity {
                }
                 else{ calendar.set(Calendar.MINUTE,tp.getCurrentMinute());  int mins=tp.getCurrentMinute();}
 
+               //put in extra string in myintent until the specified time
+               myintent.putExtra("extra","alarm on");
+
+
                pending_intent=PendingIntent.getBroadcast(AlarmHandler.this,0,myintent,PendingIntent.FLAG_UPDATE_CURRENT);
 
                alarm_manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pending_intent);
@@ -72,13 +80,31 @@ public class AlarmHandler extends AppCompatActivity {
 
         alarmOff.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
+                //cancel the alarm
                 alarm_manager.cancel(pending_intent);
+
+                //put in extra string in myintent until the specified time
+                myintent.putExtra("extra","alarm off");
+
+                //stop the ringtone
+                sendBroadcast(myintent);
+
                 putMeBack();
             }
         });
 
 
+
+
     }
+          static String mylogg(){
+               getDes = des.getText().toString();
+               return getDes;
+           }
+    public  static String alDesc(){
+        return mylogg();
+    }
+
     public void putMeBack(){
        // Intent i=new Intent(AlarmHandler.class,Chat.class);
        // startActivity(i);

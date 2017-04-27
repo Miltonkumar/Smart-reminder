@@ -4,8 +4,13 @@ package in.ac.utm.smartreminder;
  * Created by milto on 2/22/2017.
  */
 
-        import android.os.Bundle;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -77,10 +82,10 @@ public class Chat extends AppCompatActivity {
                 String userName = map.get("user").toString();
 
                 if(userName.equals(UserDetails.username)){
-                    addMessageBox(UserDetails.username+":-\n" + message, 1);
+                    addMessageBox(UserDetails.username+"\n" + message, 1);
                 }
                 else{
-                    addMessageBox(UserDetails.chatWith + ":-\n" + message, 2);
+                    addMessageBox(UserDetails.chatWith + "\n" + message, 2);
                 }
             }
 
@@ -108,7 +113,9 @@ public class Chat extends AppCompatActivity {
 
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(Chat.this);
-        textView.setText(message);
+        SpannableString newMessage =  new SpannableString(message);
+        newMessage.setSpan(new StyleSpan(Typeface.BOLD), 0, message.indexOf('\n') , Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        textView.setText(newMessage);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 0, 0, 10);
         textView.setLayoutParams(lp);
@@ -125,6 +132,12 @@ public class Chat extends AppCompatActivity {
     }
     public String myAssistant(String mess){
         String n= UserDetails.assistant(mess);
+         if(n=="one"){
+             Intent i=new Intent(this,AlarmHandler.class);
+             startActivity(i);
+             return "ok";
+         }
+
         return n;
     }
 }

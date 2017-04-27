@@ -1,7 +1,7 @@
 package in.ac.utm.smartreminder;
 
 /**
- * Created by milto on 3/19/2017.
+ * Created by milton on 3/19/2017.
  */
 
 import android.content.Intent;

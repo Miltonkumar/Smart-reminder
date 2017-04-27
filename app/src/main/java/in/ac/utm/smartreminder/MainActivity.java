@@ -12,6 +12,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+    public void about_me(View view){
+        //Intent intent=new Intent(this,.class);
+        //startActivity(intent);
+    }
     public void up_click(View view){
         Intent intent=new Intent(this,register.class);
         startActivity(intent);
